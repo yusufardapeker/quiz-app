@@ -31,7 +31,10 @@ function QuestionProvider({ children }) {
 	};
 
 	const playAgain = () => {
-		window.location.reload();
+		// window.location.reload();
+		setQuestionNumber(1);
+		setScore(0);
+		setShowResult(false);
 	};
 
 	return (
