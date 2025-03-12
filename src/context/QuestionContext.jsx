@@ -19,7 +19,9 @@ function QuestionProvider({ children }) {
 	}, []);
 
 	const loadNextQuestion = () => {
-		if (questionNumber < questions.length - 1) {
+		const totalQuestionNumber = questions.length - 1;
+
+		if (questionNumber < totalQuestionNumber) {
 			setQuestionNumber((prev) => prev + 1);
 		} else {
 			setShowResult(true);
