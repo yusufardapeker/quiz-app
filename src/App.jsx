@@ -5,7 +5,6 @@ import Header from "./components/Header";
 import Question from "./components/Question";
 import Answers from "./components/Answers";
 import Result from "./components/Result";
-
 import { QuestionContext } from "./context/QuestionContext";
 import { useContext } from "react";
 

@@ -4,7 +4,7 @@ export const QuestionContext = createContext();
 
 function QuestionProvider({ children }) {
 	const [questions, setQuestions] = useState([]);
-	const [questionNumber, setQuestionNumber] = useState(1);
+	const [questionNumber, setQuestionNumber] = useState(0);
 	const [score, setScore] = useState(0);
 	const [showResult, setShowResult] = useState(false);
 
@@ -19,7 +19,7 @@ function QuestionProvider({ children }) {
 	}, []);
 
 	const loadNextQuestion = () => {
-		if (questionNumber < 10) {
+		if (questionNumber < questions.length - 1) {
 			setQuestionNumber((prev) => prev + 1);
 		} else {
 			setShowResult(true);
@@ -32,7 +32,7 @@ function QuestionProvider({ children }) {
 
 	const playAgain = () => {
 		// window.location.reload();
-		setQuestionNumber(1);
+		setQuestionNumber(0);
 		setScore(0);
 		setShowResult(false);
 	};
@@ -41,7 +41,7 @@ function QuestionProvider({ children }) {
 		<QuestionContext.Provider
 			value={{
 				questionNumber,
-				currentQuestion: questions[questionNumber - 1],
+				currentQuestion: questions[questionNumber],
 				score,
 				showResult,
 				loadNextQuestion,
