@@ -8,13 +8,13 @@ function QuestionProvider({ children }) {
 	const [score, setScore] = useState(0);
 	const [showResult, setShowResult] = useState(false);
 
-	useEffect(() => {
-		const fetchData = async () => {
-			const res = await fetch("https://the-trivia-api.com/v2/questions/");
-			const data = await res.json();
-			setQuestions(data);
-		};
+	const fetchData = async () => {
+		const res = await fetch("https://the-trivia-api.com/v2/questions/");
+		const data = await res.json();
+		setQuestions(data);
+	};
 
+	useEffect(() => {
 		fetchData();
 	}, []);
 
@@ -31,7 +31,7 @@ function QuestionProvider({ children }) {
 	};
 
 	const playAgain = () => {
-		// window.location.reload();
+		fetchData();
 		setQuestionNumber(0);
 		setScore(0);
 		setShowResult(false);
