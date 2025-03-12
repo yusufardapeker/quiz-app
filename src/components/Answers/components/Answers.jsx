@@ -3,7 +3,10 @@ import React, { useContext, useState, useEffect } from "react";
 import { QuestionContext } from "../../../context/QuestionContext";
 
 function index() {
-	const { currentQuestion, incrementScore } = useContext(QuestionContext);
+	const {
+		currentQuestion: { correctAnswer, incorrectAnswers },
+		incrementScore,
+	} = useContext(QuestionContext);
 	const [answers, setAnswers] = useState([]);
 
 	useEffect(() => {
@@ -22,7 +25,7 @@ function index() {
 
 		if (
 			e.target.closest(".answer-element").classList.value.includes("selected") &&
-			e.target.textContent === currentQuestion.correctAnswer
+			e.target.textContent === correctAnswer
 		) {
 			incrementScore();
 		}
@@ -33,10 +36,10 @@ function index() {
 			<ul className="answers">
 				<li className="answer-element" onClick={(e) => handleClick(e)}>
 					<input type="radio" id="answer-1" />
-					<label htmlFor="answer-1">{currentQuestion.correctAnswer}</label>
+					<label htmlFor="answer-1">{correctAnswer}</label>
 				</li>
 
-				{currentQuestion.incorrectAnswers.map((answer, index) => {
+				{incorrectAnswers.map((answer, index) => {
 					return (
 						<li className="answer-element" key={index} onClick={(e) => handleClick(e)}>
 							<input type="radio" id={`answer-${index + 2}`} />
