@@ -7,7 +7,7 @@ function QuestionNumber() {
 
 	return (
 		<p className="question-number-text">
-			Question <span className="question-number">{questionNumber}</span> of 10
+			Question <span className="question-number">{questionNumber + 1}</span> of 10
 		</p>
 	);
 }
