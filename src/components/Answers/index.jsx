@@ -7,7 +7,7 @@ function index() {
 	return (
 		<div>
 			<Answers />
-			<ActionButton text={"Submit answer"} onclickAction={"loadNextQuestion"} />
+			<ActionButton onclickAction={"loadNextQuestion"}>Submit answer</ActionButton>
 		</div>
 	);
 }

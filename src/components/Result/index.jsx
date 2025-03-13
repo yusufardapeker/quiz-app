@@ -7,7 +7,7 @@ function index() {
 	return (
 		<div className="result-wrapper">
 			<ShowResult />
-			<ActionButton text={"Play again"} onclickAction={"playAgain"} />
+			<ActionButton onclickAction={"playAgain"}>Play again</ActionButton>
 		</div>
 	);
 }
