@@ -7,7 +7,9 @@ function ShowResult() {
 	return (
 		<>
 			<h2 className="result-text">Quiz Completed!</h2>
-			<p className="score-number">You Scored {score} of 10</p>
+			<p className="score">
+				You Scored <span className="score-number">{score}</span> of 10
+			</p>
 		</>
 	);
 }

@@ -12,13 +12,15 @@ body {
 	font-size: 16px;
 	background-color: $very-dark-grayish-blue;
 	color: $off-white;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	min-height: 100vh;
 }
 
 .container {
-	width: 90%;
-	max-width: 900px;
-	margin-left: auto;
-	margin-right: auto;
+	width: 340px;
 }
 
 .btn {
@@ -40,14 +42,20 @@ header {
 	display: flex;
 	flex-direction: column;
 	gap: 8px;
-	margin: 24px 0;
+	margin-bottom: 24px;
 
-	.category-name {
+	& > * {
 		text-transform: capitalize;
 	}
 
+	.category-name {
+		color: $orange;
+		margin-right: 8px;
+	}
+
 	.question-difficulty {
-		text-transform: capitalize;
+		color: $orange;
+		margin-right: 8px;
 	}
 }
 
@@ -125,8 +133,12 @@ header {
 	gap: 20px;
 	margin-top: 48px;
 
-	.score-number {
+	.score {
 		font-size: 18px;
+
+		.score-number {
+			color: $orange;
+		}
 	}
 
 	button {
@@ -137,5 +149,9 @@ header {
 @media (min-width: "376px") {
 	body {
 		font-size: 20px;
+	}
+
+	.container {
+		width: 600px;
 	}
 }

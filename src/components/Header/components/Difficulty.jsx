@@ -7,7 +7,12 @@ function Difficulty() {
 		currentQuestion: { difficulty },
 	} = useContext(QuestionContext);
 
-	return <span className="question-difficulty">{difficulty}</span>;
+	return (
+		<p>
+			<span className="question-difficulty">Difficulty:</span>
+			{difficulty}
+		</p>
+	);
 }
 
 export default Difficulty;

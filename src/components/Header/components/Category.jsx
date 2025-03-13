@@ -8,7 +8,12 @@ function Category() {
 
 	const categoryName = category.replaceAll("_", " ");
 
-	return <span className="category-name">{categoryName}</span>;
+	return (
+		<p>
+			<span className="category-name">Category:</span>
+			{categoryName}
+		</p>
+	);
 }
 
 export default Category;
