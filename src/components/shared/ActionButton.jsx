@@ -3,18 +3,10 @@ import React, { useContext, useState, useEffect } from "react";
 import { QuestionContext } from "../../context/QuestionContext";
 
 function ActionButton({ children, onclickAction }) {
-	const { questionNumber, loadNextQuestion, playAgain } = useContext(QuestionContext);
+	const { questionNumber, loadNextQuestion, playAgain, answerElements } =
+		useContext(QuestionContext);
 
-	const [answers, setAnswers] = useState([]);
-	const [progress, setProgress] = useState();
-
-	useEffect(() => {
-		const answerElements = document.querySelectorAll(".answer-element");
-		setAnswers(answerElements);
-
-		const progressElement = document.querySelector(".progress");
-		setProgress(progressElement);
-	}, []);
+	const progressElement = document.querySelector(".progress");
 
 	const handleClick = () => {
 		switch (onclickAction) {
@@ -22,8 +14,8 @@ function ActionButton({ children, onclickAction }) {
 				const progressRate = (questionNumber + 2) * 10;
 
 				loadNextQuestion();
-				answers.forEach((answer) => answer.classList.remove("selected"));
-				progress.style.width = `${progressRate}%`;
+				answerElements.current.forEach((answer) => answer.classList.remove("selected"));
+				progressElement.style.width = `${progressRate}%`;
 				break;
 
 			case "playAgain":

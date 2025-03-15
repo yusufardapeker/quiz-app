@@ -8,6 +8,8 @@ function QuestionProvider({ children }) {
 	const [score, setScore] = useState(0);
 	const [showResult, setShowResult] = useState(false);
 	const [loading, setLoading] = useState(true);
+	const [answerElements, setAnswerElements] = useState([]);
+	const [shuffledAnswers, setShuffledAnswers] = useState([]);
 
 	const fetchData = async () => {
 		setLoading(true);
@@ -20,6 +22,15 @@ function QuestionProvider({ children }) {
 	useEffect(() => {
 		fetchData();
 	}, []);
+
+	// In this API correct answer seperated from incorrect ones. So I shuffle them otherwise correct answer will always in same place.
+	const shuffle = (array) => {
+		for (let i = array.length - 1; i > 0; i--) {
+			const j = Math.floor(Math.random() * (i + 1));
+			[array[i], array[j]] = [array[j], array[i]];
+		}
+		return array;
+	};
 
 	const loadNextQuestion = () => {
 		const totalQuestionNumber = questions.length - 1;
@@ -50,6 +61,11 @@ function QuestionProvider({ children }) {
 				score,
 				showResult,
 				loading,
+				answerElements,
+				shuffledAnswers,
+				shuffle,
+				setShuffledAnswers,
+				setAnswerElements,
 				loadNextQuestion,
 				incrementScore,
 				playAgain,

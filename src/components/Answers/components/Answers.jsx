@@ -6,18 +6,21 @@ function index() {
 	const {
 		currentQuestion: { correctAnswer, incorrectAnswers },
 		incrementScore,
+		answerElements,
+		setAnswerElements,
+		shuffle,
+		setShuffledAnswers,
+		shuffledAnswers,
 	} = useContext(QuestionContext);
 
-	const [answerElements, setAnswerElements] = useState([]);
 	const answersRef = useRef([]);
-
 	const allAnswers = [correctAnswer, ...incorrectAnswers];
 
 	useEffect(() => {
 		setAnswerElements(answersRef);
-	}, []);
+		setShuffledAnswers(shuffle(allAnswers));
+	}, [correctAnswer]);
 
-	// In this API correct answer seperated from incorrect ones. So checking logic can seem redundant but yet I want to write it as if correct answer is not always first answer.
 	const handleAnswer = (e) => {
 		answerElements.current.forEach((element) => element.classList.remove("selected"));
 		e.target.closest(".answer-element").classList.add("selected");
@@ -28,7 +31,7 @@ function index() {
 	return (
 		<div className="answers-wrapper">
 			<ul className="answers">
-				{allAnswers.map((answer, index) => (
+				{shuffledAnswers.map((answer, index) => (
 					<li
 						className="answer-element"
 						onClick={handleAnswer}
