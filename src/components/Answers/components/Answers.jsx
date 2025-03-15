@@ -23,14 +23,18 @@ function index() {
 	}, [correctAnswer]);
 
 	const handleAnswer = (e) => {
+		const hasSelected = answerElements.current.some((element) =>
+			element.classList.value.includes("selected")
+		);
+
+		if (!hasSelected) e.target.closest(".answer-element").classList.add("selected");
+
 		answerElements.current.forEach((element) => {
 			if (element.textContent === correctAnswer) {
 				element.classList.add("correct");
 				setShowNextButton(true);
 			}
 		});
-
-		e.target.closest(".answer-element").classList.add("selected");
 
 		if (e.target.textContent === correctAnswer) incrementScore();
 	};
