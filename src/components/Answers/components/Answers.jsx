@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect, useRef } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 
 import { QuestionContext } from "../../../context/QuestionContext";
 
@@ -11,6 +11,7 @@ function index() {
 		shuffle,
 		setShuffledAnswers,
 		shuffledAnswers,
+		setShowNextButton,
 	} = useContext(QuestionContext);
 
 	const answersRef = useRef([]);
@@ -22,7 +23,13 @@ function index() {
 	}, [correctAnswer]);
 
 	const handleAnswer = (e) => {
-		answerElements.current.forEach((element) => element.classList.remove("selected"));
+		answerElements.current.forEach((element) => {
+			if (element.textContent === correctAnswer) {
+				element.classList.add("correct");
+				setShowNextButton(true);
+			}
+		});
+
 		e.target.closest(".answer-element").classList.add("selected");
 
 		if (e.target.textContent === correctAnswer) incrementScore();

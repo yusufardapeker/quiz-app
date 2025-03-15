@@ -4,6 +4,7 @@ $very-dark-grayish-blue: hsl(231, 28%, 25%);
 $grayish-blue: hsl(241, 24%, 39%);
 $orange: hsl(33, 95%, 53%);
 $pale-orange: hsla(33, 95%, 53%, 0.8);
+$light-green: hsl(157, 100%, 50%);
 $off-white: hsl(0, 0%, 96%);
 
 body {
@@ -46,6 +47,7 @@ body {
 
 .container {
 	width: 340px;
+	min-height: 460px;
 }
 
 .btn {
@@ -138,6 +140,11 @@ header {
 
 			&.selected {
 				color: $orange;
+			}
+
+			&.correct {
+				color: $light-green;
+				outline: 1px solid $light-green;
 			}
 		}
 

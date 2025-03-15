@@ -1,9 +1,9 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext } from "react";
 
 import { QuestionContext } from "../../context/QuestionContext";
 
 function ActionButton({ children, onclickAction }) {
-	const { questionNumber, loadNextQuestion, playAgain, answerElements } =
+	const { questionNumber, loadNextQuestion, playAgain, answerElements, setShowNextButton } =
 		useContext(QuestionContext);
 
 	const progressElement = document.querySelector(".progress");
@@ -14,7 +14,9 @@ function ActionButton({ children, onclickAction }) {
 				const progressRate = (questionNumber + 2) * 10;
 
 				loadNextQuestion();
-				answerElements.current.forEach((answer) => answer.classList.remove("selected"));
+				setShowNextButton(false);
+				answerElements.current.forEach((element) => element.classList.remove("selected"));
+				answerElements.current.forEach((element) => element.classList.remove("correct"));
 				progressElement.style.width = `${progressRate}%`;
 				break;
 

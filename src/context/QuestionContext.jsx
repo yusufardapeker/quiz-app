@@ -10,6 +10,7 @@ function QuestionProvider({ children }) {
 	const [loading, setLoading] = useState(true);
 	const [answerElements, setAnswerElements] = useState([]);
 	const [shuffledAnswers, setShuffledAnswers] = useState([]);
+	const [showNextButton, setShowNextButton] = useState(false);
 
 	const fetchData = async () => {
 		setLoading(true);
@@ -63,6 +64,8 @@ function QuestionProvider({ children }) {
 				loading,
 				answerElements,
 				shuffledAnswers,
+				showNextButton,
+				setShowNextButton,
 				shuffle,
 				setShuffledAnswers,
 				setAnswerElements,
