@@ -19,6 +19,31 @@ body {
 	min-height: 100vh;
 }
 
+.loading {
+	position: relative;
+
+	&::before {
+		content: "";
+		position: absolute;
+		width: 120px;
+		height: 120px;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		border-width: 6px;
+		border-style: solid;
+		border-color: $orange transparent $orange transparent;
+		border-radius: 50%;
+		animation: spin 2s linear infinite;
+	}
+}
+
+@keyframes spin {
+	to {
+		transform: translate(-50%, -50%) rotate(360deg);
+	}
+}
+
 .container {
 	width: 340px;
 }

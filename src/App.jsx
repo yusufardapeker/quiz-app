@@ -8,11 +8,13 @@ import { QuestionContext } from "./context/QuestionContext";
 import { useContext } from "react";
 
 function App() {
-	const { showResult, currentQuestion } = useContext(QuestionContext);
+	const { showResult, loading } = useContext(QuestionContext);
 
 	return (
 		<>
-			{currentQuestion && (
+			{loading ? (
+				<div className="loading">Loading...</div>
+			) : (
 				<div className="container">{showResult ? <Result /> : <QuestionWrapper />}</div>
 			)}
 		</>
