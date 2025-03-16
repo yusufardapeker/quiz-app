@@ -131,7 +131,7 @@ header {
 			background-color: $grayish-blue;
 			padding: 8px 16px;
 			border-radius: 4px;
-			transition: all 400ms ease;
+			transition: all 200ms linear;
 			cursor: pointer;
 
 			&:hover {
@@ -186,5 +186,9 @@ header {
 	.container {
 		width: 600px;
 		min-height: 500px;
+	}
+
+	.btn {
+		font-size: 18px;
 	}
 }
