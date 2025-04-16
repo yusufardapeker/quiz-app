@@ -1,7 +1,7 @@
 import "./styles/reset.css";
 import "./styles/style.scss";
 
-import QuestionWrapper from "./components/questionWrapper";
+import QuestionWrapper from "./components/QuestionWrapper";
 import Result from "./components/Result";
 
 import { QuestionContext } from "./context/QuestionContext";
