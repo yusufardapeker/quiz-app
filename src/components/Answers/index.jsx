@@ -8,10 +8,15 @@ function index() {
 	const { showNextButton } = useContext(QuestionContext);
 
 	return (
-		<div>
+		<div className="answer">
 			<Answers />
 
-			{showNextButton && <ActionButton onclickAction={"loadNextQuestion"}>Next</ActionButton>}
+			<ActionButton
+				visibility={showNextButton ? "visible" : "hidden"}
+				onclickAction={"loadNextQuestion"}
+			>
+				Next
+			</ActionButton>
 		</div>
 	);
 }

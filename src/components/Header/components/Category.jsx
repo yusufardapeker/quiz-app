@@ -9,7 +9,7 @@ function Category() {
 	const categoryName = category.replaceAll("_", " ");
 
 	return (
-		<p>
+		<p className="category-wrapper">
 			<span className="category-name">Category:</span>
 			{categoryName}
 		</p>

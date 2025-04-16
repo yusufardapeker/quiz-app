@@ -1,17 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
+import { QuestionContext } from "../../context/QuestionContext";
 
-import QuestionNumber from "./components/QuestionNumber";
-import QuestionText from "./components/QuestionText";
-import ProgressBar from "./components/ProgressBar";
+function QuestionText() {
+	const {
+		currentQuestion: { question },
+	} = useContext(QuestionContext);
 
-function index() {
 	return (
 		<div className="question-container">
-			<QuestionNumber />
-			<QuestionText />
-			<ProgressBar />
+			<p>{question.text}</p>
 		</div>
 	);
 }
 
-export default index;
+export default QuestionText;

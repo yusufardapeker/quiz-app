@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 
 import { QuestionContext } from "../../context/QuestionContext";
 
-function ActionButton({ children, onclickAction }) {
+function ActionButton({ children, onclickAction, visibility = "hidden" }) {
 	const { questionNumber, loadNextQuestion, playAgain, answerElements, setShowNextButton } =
 		useContext(QuestionContext);
 
@@ -27,7 +27,7 @@ function ActionButton({ children, onclickAction }) {
 	};
 
 	return (
-		<button className="btn" onClick={handleClick}>
+		<button className={`btn ${visibility}`} onClick={handleClick}>
 			{children}
 		</button>
 	);
