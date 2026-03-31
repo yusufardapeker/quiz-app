@@ -1,15 +1,13 @@
-import React, { useContext } from "react";
-
-import { QuestionContext } from "../../../context/QuestionContext";
+import { useQuestion } from "../../../context/QuestionContext";
 
 function Difficulty() {
 	const {
 		currentQuestion: { difficulty },
-	} = useContext(QuestionContext);
+	} = useQuestion();
 
 	return (
-		<p>
-			<span className="question-difficulty">Difficulty:</span>
+		<p className="difficulty-wrapper">
+			<span className="difficulty-label">Difficulty:</span>
 			{difficulty}
 		</p>
 	);

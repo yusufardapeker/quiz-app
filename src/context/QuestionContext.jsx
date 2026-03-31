@@ -1,46 +1,52 @@
-import React, { createContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect, useContext } from "react";
 
 export const QuestionContext = createContext();
 
 function QuestionProvider({ children }) {
 	const [questions, setQuestions] = useState([]);
-	const [questionNumber, setQuestionNumber] = useState(0);
+	const [questionIndex, setQuestionIndex] = useState(0);
 	const [score, setScore] = useState(0);
 	const [showResult, setShowResult] = useState(false);
 	const [loading, setLoading] = useState(true);
-	const [answerElements, setAnswerElements] = useState([]);
 	const [shuffledAnswers, setShuffledAnswers] = useState([]);
 	const [showNextButton, setShowNextButton] = useState(false);
+	const [progressRate, setProgressRate] = useState(1);
+	const [hasError, setHasError] = useState(false);
 
 	const fetchData = async () => {
-		setLoading(true);
-		const res = await fetch("https://the-trivia-api.com/v2/questions/");
-		const data = await res.json();
-		setQuestions(data);
-		setLoading(false);
+		try {
+			setLoading(true);
+			setHasError(false);
+			const res = await fetch("https://the-trivia-api.com/v2/questions/");
+			const data = await res.json();
+			setQuestions(data);
+
+			if (!res.ok) {
+				throw new Error(`HTTP error! Status: ${res.status}`);
+			}
+		} catch (error) {
+			console.log("Error", error);
+			setHasError(true);
+		} finally {
+			setLoading(false);
+		}
 	};
 
 	useEffect(() => {
 		fetchData();
 	}, []);
 
-	// In this API correct answer seperated from incorrect ones. So I shuffle them otherwise correct answer will always in same place.
-	const shuffle = (array) => {
-		for (let i = array.length - 1; i > 0; i--) {
-			const j = Math.floor(Math.random() * (i + 1));
-			[array[i], array[j]] = [array[j], array[i]];
-		}
-		return array;
-	};
-
 	const loadNextQuestion = () => {
 		const totalQuestionNumber = questions.length - 1;
 
-		if (questionNumber < totalQuestionNumber) {
-			setQuestionNumber((prev) => prev + 1);
+		if (questionIndex < totalQuestionNumber) {
+			setQuestionIndex((prev) => prev + 1);
+			setProgressRate((prev) => prev + 1);
 		} else {
 			setShowResult(true);
 		}
+
+		setShowNextButton(false);
 	};
 
 	const incrementScore = () => {
@@ -49,26 +55,27 @@ function QuestionProvider({ children }) {
 
 	const playAgain = () => {
 		fetchData();
-		setQuestionNumber(0);
+		setQuestionIndex(0);
 		setScore(0);
 		setShowResult(false);
+		setProgressRate(1);
 	};
 
 	return (
 		<QuestionContext.Provider
 			value={{
-				questionNumber,
-				currentQuestion: questions[questionNumber],
+				questionIndex,
+				currentQuestion: questions[questionIndex],
 				score,
 				showResult,
 				loading,
-				answerElements,
 				shuffledAnswers,
 				showNextButton,
+				progressRate,
+				hasError,
+				setProgressRate,
 				setShowNextButton,
-				shuffle,
 				setShuffledAnswers,
-				setAnswerElements,
 				loadNextQuestion,
 				incrementScore,
 				playAgain,
@@ -79,4 +86,10 @@ function QuestionProvider({ children }) {
 	);
 }
 
-export default QuestionProvider;
+function useQuestion() {
+	const context = useContext(QuestionContext);
+
+	return context;
+}
+
+export { useQuestion, QuestionProvider };

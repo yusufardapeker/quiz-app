@@ -1,12 +1,11 @@
-import React, { useContext } from "react";
-import { QuestionContext } from "../../../context/QuestionContext";
+import { useQuestion } from "../../../context/QuestionContext";
 
 function ShowResult() {
-	const { score } = useContext(QuestionContext);
+	const { score } = useQuestion();
 
 	return (
 		<>
-			<h2 className="result-text">Quiz Completed!</h2>
+			<p className="completed-text">Quiz Completed!</p>
 			<p className="score">
 				You Scored <span className="score-number">{score}</span> of 10
 			</p>

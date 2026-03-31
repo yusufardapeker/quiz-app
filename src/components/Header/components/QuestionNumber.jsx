@@ -1,13 +1,11 @@
-import React, { useContext } from "react";
-
-import { QuestionContext } from "../../../context/QuestionContext";
+import { useQuestion } from "../../../context/QuestionContext";
 
 function QuestionNumber() {
-	const { questionNumber } = useContext(QuestionContext);
+	const { questionIndex } = useQuestion();
 
 	return (
 		<p className="question-number-text">
-			Question <span className="question-number">{questionNumber + 1}</span> of 10
+			Question <span className="question-number">{questionIndex + 1}</span> of 10
 		</p>
 	);
 }

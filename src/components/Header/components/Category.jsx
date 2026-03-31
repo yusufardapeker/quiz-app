@@ -1,16 +1,15 @@
-import React, { useContext } from "react";
-import { QuestionContext } from "../../../context/QuestionContext";
+import { useQuestion } from "../../../context/QuestionContext";
 
 function Category() {
 	const {
 		currentQuestion: { category },
-	} = useContext(QuestionContext);
+	} = useQuestion();
 
 	const categoryName = category.replaceAll("_", " ");
 
 	return (
 		<p className="category-wrapper">
-			<span className="category-name">Category:</span>
+			<span className="category-name-label">Category:</span>
 			{categoryName}
 		</p>
 	);

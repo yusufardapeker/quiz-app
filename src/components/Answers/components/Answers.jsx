@@ -1,56 +1,55 @@
-import React, { useContext, useEffect, useRef } from "react";
+import { useEffect, useState } from "react";
 
-import { QuestionContext } from "../../../context/QuestionContext";
+import { useQuestion } from "../../../context/QuestionContext";
+import { shuffle } from "../../../utils/shuffleArray";
+import clsx from "clsx";
 
 function index() {
 	const {
 		currentQuestion: { correctAnswer, incorrectAnswers },
 		incrementScore,
-		answerElements,
-		setAnswerElements,
-		shuffle,
 		setShuffledAnswers,
 		shuffledAnswers,
 		setShowNextButton,
-	} = useContext(QuestionContext);
+	} = useQuestion();
 
-	const answersRef = useRef([]);
-	const allAnswers = [correctAnswer, ...incorrectAnswers];
+	const [selectedAnswer, setSelectedAnswer] = useState(null);
+	const [isAnswered, setIsAnswered] = useState(false);
 
 	useEffect(() => {
-		setAnswerElements(answersRef);
+		const allAnswers = [correctAnswer, ...incorrectAnswers];
 		setShuffledAnswers(shuffle(allAnswers));
+		setSelectedAnswer(null);
+		setIsAnswered(false);
 	}, [correctAnswer]);
 
-	const handleAnswer = (e) => {
-		const hasSelected = answerElements.current.some((element) =>
-			element.classList.value.includes("selected")
-		);
+	const handleAnswer = (answer) => {
+		if (isAnswered) return;
 
-		if (!hasSelected) e.target.closest(".answer-element").classList.add("selected");
+		setSelectedAnswer(answer);
+		setIsAnswered(true);
+		setShowNextButton(true);
 
-		answerElements.current.forEach((element) => {
-			if (element.textContent === correctAnswer) {
-				element.classList.add("correct");
-				setShowNextButton(true);
-			}
-		});
-
-		if (e.target.textContent === correctAnswer) incrementScore();
+		if (correctAnswer === answer) {
+			incrementScore();
+		}
 	};
 
 	return (
 		<div className="answers-wrapper">
 			<ul className="answers">
 				{shuffledAnswers.map((answer, index) => (
-					<li
-						className="answer-element"
-						onClick={handleAnswer}
-						key={index}
-						ref={(el) => (answersRef.current[index] = el)}
-					>
-						<input type="radio" id={index} />
-						<label htmlFor={index}>{answer}</label>
+					<li className="answer-element" key={index}>
+						<input type="checkbox" id={index} onChange={() => handleAnswer(answer)} />
+						<label
+							htmlFor={index}
+							className={clsx("answer-text", {
+								selected: selectedAnswer === answer,
+								correct: isAnswered && correctAnswer === answer,
+							})}
+						>
+							{answer}
+						</label>
 					</li>
 				))}
 			</ul>

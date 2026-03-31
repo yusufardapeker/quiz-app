@@ -1,10 +1,9 @@
-import React, { useContext } from "react";
-import { QuestionContext } from "../../context/QuestionContext";
+import { useQuestion } from "../../context/QuestionContext";
 
 function QuestionText() {
 	const {
 		currentQuestion: { question },
-	} = useContext(QuestionContext);
+	} = useQuestion();
 
 	return (
 		<div className="question-container">

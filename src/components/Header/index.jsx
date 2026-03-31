@@ -1,5 +1,3 @@
-import React from "react";
-
 import QuestionNumber from "./components/QuestionNumber";
 import ProgressBar from "./components/ProgressBar";
 import Category from "./components/Category";

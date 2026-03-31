@@ -1,14 +1,13 @@
 import "./styles/reset.css";
-import "./styles/style.scss";
+import "./styles/style.css";
 
 import QuestionWrapper from "./components/QuestionWrapper";
 import Result from "./components/Result";
 
-import { QuestionContext } from "./context/QuestionContext";
-import { useContext } from "react";
+import { useQuestion } from "./context/QuestionContext";
 
 function App() {
-	const { showResult, loading } = useContext(QuestionContext);
+	const { showResult, loading } = useQuestion();
 
 	return (
 		<>
