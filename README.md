@@ -15,7 +15,7 @@ In this web app, you can test yourself with 10 randomly selected questions from 
 
 ### About The Project
 
-I don't have the actual design file so the layout is not pixel-perfect. The website is responsive only 1440px and 375px screen sizes. Implementation focuses on:
+The website is responsive only 1440px and 375px screen sizes. Implementation focuses on:
 
 - Clean and modern CSS
 - Good accessibility practices
